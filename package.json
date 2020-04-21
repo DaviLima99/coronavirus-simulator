@@ -8,7 +8,11 @@
     "start": "nodemon src/server.js"
   },
   "keywords": [],
-  "author": "",
+  "author": { 
+    "name" : "Davi Nascimento de Lima",
+    "email" : "davi.n.lima99@gmail.com",
+    "url" : "https://davilima99.github.io/davilima-page/"
+  },
   "license": "ISC",
   "dependencies": {
     "express": "^4.17.1",
