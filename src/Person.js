@@ -5,9 +5,10 @@ import {
 } from './constants.js';
 
 export class Person {
-    constructor(x, y, id, state, p5) {
+    constructor(x, y, id, state, p5, handler) {
         this.timeInfected = 0;
         this.time = 0;
+        this.handler = handler;
         this.id = id;
         this.state = state;
         this.p5 = p5;
@@ -27,18 +28,19 @@ export class Person {
         }
 
         if (this.timeInfected > 4000) {
+            this.handler.addValue(HEALTH.death, this.state);
             this.changeState(HEALTH.death);
         }
 
         if (this.timeRecover > 1000) {
+            this.handler.addValue(HEALTH.recovered, this.state);
             this.changeState(HEALTH.recovered);
         }
     }
 
-    checkContact = function(people) {
+    checkContact = function (people) {
         for (var i = 0; i < people.length; i++) {   
-
-            for (var j = 0; j < people.length; j++) {
+            for (var j = 0; j < people.length; j++) {          
                 if (i != j && people[i].intersects(people[j])) {
 
                     if (people[i].state !== HEALTH.death) {
@@ -53,6 +55,7 @@ export class Person {
 
     applyInfect = function (person) {
         if (this.state === HEALTH.healthy && person.state === HEALTH.infected) {
+            this.handler.addValue(HEALTH.infected, this.state);
             this.changeState(HEALTH.infected)
             return;
         }
@@ -63,23 +66,21 @@ export class Person {
 
     }
 
-    intersects = function(other) {
-        var d = this.p5.dist(this.pos.x, this.pos.y, other.pos.x, other.pos.y);
+    intersects = function (other) {
+        var dist = this.p5.dist(this.pos.x, this.pos.y, other.pos.x, other.pos.y);
 
-        if (d < this.radius + other.radius) {
+        if (dist < this.radius + other.radius) {
             return true; 
         } else {
             return false;
         }
-    
     }
     
     changeState = function (newState) {
         this.state = newState;
     }
 
-    move = function() {
-
+    move = function () {
         if (this.state === HEALTH.death) {
             return;
         }
@@ -88,7 +89,7 @@ export class Person {
         this.pos.y += this.p5.random(-SPEED, SPEED);
     }
 
-    getColor = function() {
+    getColor = function () {
         switch (this.state) {
             case HEALTH.healthy:
                 return PEOPLE_COLORS.healthy;
@@ -105,6 +106,7 @@ export class Person {
 
     show = function () {
         const color = this.getColor();
+
         this.p5.stroke(50);
         this.p5.fill(color);
         this.p5.ellipse(this.pos.x, this.pos.y, this.radius * 2, this.radius * 2);

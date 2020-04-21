@@ -1,17 +1,22 @@
 import {Person} from './Person.js';
+import {ValuesHandler} from './ValuesHandler.js';
 import {
     MAX_PEOPLE,
-    HEALTH
+    HEALTH,
+    VALUES
 } from './constants.js';
 
 let people = [];
+var handlerValue;
 
 const cavasSimulator = ( sketch ) => {
-  
+
     sketch.setup = () => {
         var canvas = sketch.createCanvas(900, 500);
+        handlerValue = new ValuesHandler();
         canvas.parent('canvas');
         generatePeople();
+        handlerValue.initValues(people)
     };
     
     sketch.draw = () => {
@@ -20,7 +25,6 @@ const cavasSimulator = ( sketch ) => {
     };
 
     const getRandomState = () => {
-
         var arrHealth = [
             HEALTH.infected,
             HEALTH.healthy
@@ -30,14 +34,15 @@ const cavasSimulator = ( sketch ) => {
     }
 
     const generatePeople =  () => {
-        const qntd = 30;
+        const qntd = MAX_PEOPLE;
 
         for (let index = 0; index < qntd; index++) {
             var x = sketch.random(sketch.width);
             var y = sketch.random(sketch.height);
             people.push(new Person(
-                x, y, index, getRandomState(), sketch
+                x, y, index, getRandomState(), sketch, handlerValue
             ));
+
         }
     }
 
@@ -47,7 +52,7 @@ const cavasSimulator = ( sketch ) => {
             person.move();
             person.countRecover();
             person.show();
-        });
+        });  
     }
   };
 
