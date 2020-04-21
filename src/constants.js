@@ -1,13 +1,13 @@
 const PEOPLE_COLORS = {
-    healthy: '#57db66',
-    infected: '#db5762',
-    recovered: '#ad57db',
-    death: '#9b92a0'
+    healthy: '#1cc88a',
+    infected: '#e74a3b',
+    recovered: '#f6c23e',
+    death: '#4e73df'
 }
 
 const MAX_PEOPLE = 25;
 
-const SPEED = 3;
+const SPEED = 7;
 
 const HEALTH = {
     healthy: 'healthy',

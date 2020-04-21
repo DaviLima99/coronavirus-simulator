@@ -6,6 +6,8 @@ import {
 
 export class Person {
     constructor(x, y, id, state, p5) {
+        this.timeInfected = 0;
+        this.time = 0;
         this.id = id;
         this.state = state;
         this.p5 = p5;
@@ -16,18 +18,49 @@ export class Person {
         }
     }
 
+    countRecover = function () {
+        if (this.state === HEALTH.infected) {
+            this.timeInfected++;
+            this.timeRecover++;
+        } else {
+            this.timeRecover = 0;
+        }
+
+        if (this.timeInfected > 4000) {
+            this.changeState(HEALTH.death);
+        }
+
+        if (this.timeRecover > 1000) {
+            this.changeState(HEALTH.recovered);
+        }
+    }
+
     checkContact = function(people) {
         for (var i = 0; i < people.length; i++) {   
 
             for (var j = 0; j < people.length; j++) {
                 if (i != j && people[i].intersects(people[j])) {
 
-                    people[i].changeState(HEALTH.death);
-                    people[j].changeState(HEALTH.death);
+                    if (people[i].state !== HEALTH.death) {
+                        people[i].applyInfect(people[j]);
+                        people[j].applyInfect(people[i]);
+                    }
 
                 }
             }
         }
+    }
+
+    applyInfect = function (person) {
+        if (this.state === HEALTH.healthy && person.state === HEALTH.infected) {
+            this.changeState(HEALTH.infected)
+            return;
+        }
+
+        if (this.state === HEALTH.infected && person.state === HEALTH.infected) {
+            this.timeInfected = 0;
+        }
+
     }
 
     intersects = function(other) {
@@ -46,6 +79,11 @@ export class Person {
     }
 
     move = function() {
+
+        if (this.state === HEALTH.death) {
+            return;
+        }
+        
         this.pos.x += this.p5.random(-SPEED, SPEED);
         this.pos.y += this.p5.random(-SPEED, SPEED);
     }
