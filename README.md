@@ -5,6 +5,7 @@
 
 <h4 align="center">
   🦠 Coronavirus Simulator
+    
    The Coronavirus Simulator project was developed during quarantine from a college challenge
 </h4>
 <p align="center">
