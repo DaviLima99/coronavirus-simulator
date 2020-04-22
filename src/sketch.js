@@ -3,18 +3,22 @@ import {ValuesHandler} from './ValuesHandler.js';
 import {
     MAX_PEOPLE,
     HEALTH,
-    VALUES
+    VALUES,
+    RUN
 } from './constants.js';
 
+let canvas;
 let people = [];
 var handlerValue;
+let cycle = 0;
 
 const cavasSimulator = ( sketch ) => {
 
     sketch.setup = () => {
-        var canvas = sketch.createCanvas(900, 500);
-        handlerValue = new ValuesHandler();
+        canvas = sketch.createCanvas(900, 500);
         canvas.parent('canvas');
+
+        handlerValue = new ValuesHandler();
         generatePeople();
         handlerValue.initValues(people)
     };
@@ -22,6 +26,14 @@ const cavasSimulator = ( sketch ) => {
     sketch.draw = () => {
         sketch.background('#1f2831');
         drawPeople();
+
+        cycle++;
+        if (VALUES.healthy === 0) {
+            // RUN = false;
+            handlerValue.showResult(cycle);
+            sketch.noLoop();
+        }
+        
     };
 
     const getRandomState = () => {

@@ -5,6 +5,8 @@ const PEOPLE_COLORS = {
     death: '#4e73df'
 }
 
+const RUN = true;
+
 const VALUES = {
     healthy: 0,
     recovered: 0,
@@ -14,7 +16,7 @@ const VALUES = {
 
 const MAX_PEOPLE = 25;
 
-const SPEED = 7;
+const SPEED = 8;
 
 const HEALTH = {
     healthy: 'healthy',
@@ -29,5 +31,6 @@ export {
     HEALTH,
     MAX_PEOPLE,
     SPEED,
-    VALUES
+    VALUES,
+    RUN
 }

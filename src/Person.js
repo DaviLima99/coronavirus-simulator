@@ -87,6 +87,14 @@ export class Person {
         
         this.pos.x += this.p5.random(-SPEED, SPEED);
         this.pos.y += this.p5.random(-SPEED, SPEED);
+
+        if ((this.pos.x + this.radius > this.p5.width) || (this.pos.x - this.radius < 0 )) {
+            this.pos.x -= this.p5.random(-SPEED, SPEED);
+          }
+
+        if ((this.pos.y + this.radius > this.p5.height) || (this.pos.y - this.radius < 2 )) {
+            this.pos.y -= this.p5.random(-SPEED, SPEED);
+          }
     }
 
     getColor = function () {

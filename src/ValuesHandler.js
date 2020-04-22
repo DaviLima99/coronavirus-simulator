@@ -31,10 +31,15 @@ export class ValuesHandler {
         this.update();
     }
     
-    
+    showResult = function(value) {
+        document.getElementById('cycles').innerHTML = `Number of cycles:  ${value}`;
+        document.getElementById('defaultCanvas0').style.backgroundColor = "red";
+    }
+
     update = function() {
         this.forEach(VALUES, function (value, prop, obj) {
             document.getElementById(prop).innerHTML = value;
+            
         });
     }
 
