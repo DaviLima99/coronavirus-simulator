@@ -5,6 +5,7 @@
 
 <h4 align="center">
   🦠 Coronavirus Simulator
+    
    The Coronavirus Simulator project was developed during quarantine from a college challenge
 </h4>
 <p align="center">
@@ -12,10 +13,6 @@
 
   <img alt="Repository size" src="https://img.shields.io/github/repo-size/DaviLima99/coronavirus-simulator">
   
-  <a href="https://github.com/.../commits/master">
-    <img alt="GitHub last commit" src="https:/DaviLima99/coronavirus-simulator/img.shields.io/github/last-commit/">
-  </a>
-
   <a href="https://github.com/../issues">
     <img alt="Repository issues" src="https://img.shields.io/github/issues/DaviLima99/coronavirus-simulator">
   </a>
